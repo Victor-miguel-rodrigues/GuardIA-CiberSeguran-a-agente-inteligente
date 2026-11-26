@@ -126,6 +126,7 @@ Fale naturalmente, com as suas palavras. Nas primeiras vezes, vale usar um dos [
 |-------|----------------|-------------------|
 | [Offensive Pentest](skills/offensive-pentest/SKILL.md) | Guia a condução de simulação Red Team, auditoria web e geração de relatórios profissionais | "Me ajuda a conduzir um teste ofensivo no Juice Shop com matriz de risco?" |
 | [Live Browser](skills/live-browser/SKILL.md) | Abre e inspeciona aplicações web em tempo real no painel lateral do harness | "/browser http://192.xxx.xx.xx:porta" |
+| [Scope Guard](skills/scope-guard/SKILL.md) | Valida escopo In-Scope vs Out-of-Scope (direto para labs próprios ou processando regras de Bug Bounty) | "Esse site é meu laboratório: http://localhost:3000" ou "Aqui está o escopo do Bugcrowd: [...]" |
 | [Plano de estudos](skills/study-plan/SKILL.md) | Organiza o que estudar, em que ordem e em quanto tempo | "Quero concluir este Bootcamp em 2 meses, me ajuda?" |
 | [Destravar desafio](skills/unblock-challenge/SKILL.md) | Conduz você até a solução de um desafio de código ou projeto, sem dar a resposta pronta | "Travei nesse desafio, me ajuda?" |
 | [Explicar conceito](skills/explain-concept/SKILL.md) | Explica conceitos de forma simples, com analogias e exemplos | "Não entendi o que é uma API." |
@@ -140,6 +141,20 @@ A pesquisa na web usa a busca do seu harness. Se ele não tiver busca própria, 
 ## 📝 Modelos de prompt
 
 Copie, preencha o que está entre colchetes e envie. Não precisa de formato perfeito: o agente pede mais detalhes se precisar.
+
+**🛡️ Scope Guard (Ambiente Próprio vs Bug Bounty)**
+
+```
+# Cenário 1: Se o site/lab for seu:
+"Esse site é meu laboratório local: http://192.xxx.xx.xx:porta"
+
+# Cenário 2: Se for um programa de Bug Bounty:
+"Estou analisando um programa de Bug Bounty.
+- Nome do programa: [ex: Vinted / Bugcrowd]
+- Escopo In-Scope: [cole a lista de domínios permitidos]
+- Out-of-Scope / Exclusões: [cole as proibições]
+- Alvo que pretendo analisar: [URL/domínio]"
+```
 
 **🛡️ Offensive Pentest (Red Team & Cibersegurança)**
 
@@ -204,10 +219,15 @@ Quero escolher meu próximo passo na Carreira AI Builder.
 |:---|:---:|:---|
 | `AGENTS.md` | Principal | Fonte da verdade do agente: define persona, regras de conduta, catálogo de skills e integração. |
 | `skills/offensive-pentest/SKILL.md` | Skill | Guia completo da **Kill Chain de 5 Fases do Red Team** (Reconhecimento, Enumeração, Exploração, Pós-Exploração e Relatório). |
+| `skills/offensive-pentest/README.md` | Documentação | Explicação detalhada da skill para humanos e desenvolvedores. |
+| `skills/scope-guard/SKILL.md` | Skill | Validador dinâmico de escopo autorizado (In-Scope) e técnicas/alvos proibidos (Out-of-Scope). |
+| `skills/scope-guard/README.md` | Documentação | Guia explicativo da triagem de escopo (Lab próprio vs Bug Bounty). |
 | `skills/live-browser/SKILL.md` | Skill | Orienta o uso do navegador integrado no painel lateral (`/browser <URL>`) para inspeção de DOM e evidências. |
+| `agent/knowledge/security-basics.md` | Conhecimento | Base conceitual de cibersegurança: Tríade CIA, severidade CVSS, risco vs vulnerabilidade e boas práticas. |
+| `app.py` | Demonstração | Código de teste em Python comparando login vulnerável a SQLi (CWE-89 / MITRE T1190) com a correção parametrizada. |
 | `reports/PENTEST-REPORT-JUICESHOP.md` | Relatório | Relatório técnico profissional com Sumário Executivo, Matriz de Risco, Findings detalhados e Defensive Coding. |
 | `docs/images/` | Evidências | Capturas de tela reais coletadas durante a auditoria (`01-juiceshop-home.png`, `02-juiceshop-scoreboard.png`, `03-juiceshop-ftp.png`). |
-| `agent/persona.md` | Identidade | Tom de voz, valores pedagógicos e postura de mentor experiente. |
+| `agent/persona.md` | Identidade | Tom de voz, valores pedagógicos e a especialização em mentor de cibersegurança e AppSec. |
 | `agent/knowledge/` | Conhecimento | Contexto detalhado sobre a plataforma DIO, Carreiras, Bootcamps e Desafios. |
 
 ---
@@ -225,11 +245,16 @@ dio-agent/
 ├── README.md                Este guia completo (educacional + ofensivo)
 ├── AGENTS.md                Definição do agente (lida pelo harness)
 ├── CLAUDE.md                Atalho para o Claude Code
+├── app.py                   Script de validação prática (SQLi vulnerável vs corrigido)
 ├── agent/
-│   ├── persona.md           A personalidade e o tom do agente
-│   └── knowledge/           O que o agente sabe sobre a DIO
+│   ├── persona.md           Personalidade, valores e especialização em cibersegurança
+│   └── knowledge/           Base de conhecimento (DIO, Carreiras e security-basics.md)
+│       ├── dio-platform.md
+│       ├── learning-experiences.md
+│       └── security-basics.md
 ├── skills/                  Uma pasta por skill, cada uma com o seu SKILL.md
-│   ├── offensive-pentest/   Skill de simulação ofensiva e Red Team
+│   ├── offensive-pentest/   Skill de simulação ofensiva e Red Team (com README.md)
+│   ├── scope-guard/         Skill de validação de escopo (Lab próprio vs Bug Bounty)
 │   ├── live-browser/        Skill de inspeção com navegador em tempo real
 │   ├── study-plan/          Plano de estudos
 │   └── ...
